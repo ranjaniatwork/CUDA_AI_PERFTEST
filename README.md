@@ -20,28 +20,7 @@
 - **📈 Enterprise Reporting**: Comprehensive metrics, visualizations, and alerts
 
 ## 🏗️ Architecture
-
-```
-PerfAI System Architecture
-┌─────────────────────────────────────────────────────────────┐
-│                    PerfAI Framework                         │
-├─────────────────┬─────────────────┬─────────────────────────┤
-│  CUDA Engine   │   Telemetry     │    AI Analysis          │
-│                 │                 │                         │
-│ • cuBLAS GEMM   │ • CUDA Events   │ • Isolation Forest     │
-│ • Custom Kernels│ • nvtx Markers  │ • LSTM Prediction      │
-│ • Memory Ops    │ • GPU Metrics   │ • Baseline Learning    │
-│ • Concurrency   │ • Bandwidth     │ • Confidence Scoring   │
-└─────────────────┴─────────────────┴─────────────────────────┘
-                           │
-                    ┌─────────────┐
-                    │ Automation  │
-                    │   Pipeline  │
-                    │ • CI/CD     │
-                    │ • Reporting │
-                    │ • Alerting  │
-                    └─────────────┘
-```
+![Architecure](https://github.com/ranjaniatwork/CUDA_AI_PERFTEST/blob/master/Architecture1.png)
 
 ## 📦 Repository Structure
 
