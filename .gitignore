@@ -1,0 +1,64 @@
+# Build directories
+build/
+bin/
+obj/
+*.o
+*.exe
+*.out
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.pytest_cache/
+
+# Virtual environments
+venv/
+env/
+.env
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+logs/
+*.log
+*.tmp
+*.temp
+
+# Data files (large datasets)
+data/large_datasets/
+*.csv.large
+*.json.large
+
+# CUDA specific
+*.ptx
+*.cubin
+*.fatbin
+
+# Documentation build
+docs/_build/
+docs/build/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Test outputs
+test_output/
+*.test
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/

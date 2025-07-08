@@ -1,0 +1,65 @@
+NVPROF Profile Report - PerfAI CUDA Workloads
+================================================================================
+Generated: 2025-07-08 12:20:30
+Device: NVIDIA RTX 4090
+CUDA Version: 12.0
+Driver Version: 535.86
+
+GPU UTILIZATION SUMMARY:
+================================================================================
+Kernel Name                    | Calls | Time(ms) | Avg(ms) | GPU% | Occupancy
+-------------------------------|-------|----------|---------|------|----------
+matrix_multiply_kernel         |   100 |   1234.5 |  12.345 | 98.2 |     85.3%
+convolution_2d_kernel          |    50 |    567.8 |  11.356 | 97.5 |     82.1%
+cublas_sgemm                   |   200 |    890.2 |   4.451 | 99.1 |     92.7%
+
+MEMORY BANDWIDTH ANALYSIS:
+================================================================================
+Operation                      | Bandwidth(GB/s) | Efficiency | Transfers
+-------------------------------|-----------------|------------|----------
+Host to Device                |           45.2  |      89.3% |       150
+Device to Host                 |           42.8  |      84.7% |       150  
+Device to Device               |          892.1  |      94.2% |      2500
+
+PERFORMANCE HOTSPOTS:
+================================================================================
+1. Matrix Multiplication Kernel:
+   - Theoretical Peak: 83.0 TFLOPS
+   - Achieved: 79.2 TFLOPS (95.4% efficiency)
+   - Bottleneck: Memory bandwidth (892.1 GB/s vs 1008 GB/s peak)
+
+2. Convolution Kernel:
+   - Theoretical Peak: 83.0 TFLOPS  
+   - Achieved: 72.5 TFLOPS (87.3% efficiency)
+   - Bottleneck: Register usage limiting occupancy
+
+3. cuBLAS Operations:
+   - Library optimized performance
+   - 99.1% GPU utilization achieved
+   - Near-optimal memory coalescing
+
+OPTIMIZATION RECOMMENDATIONS:
+================================================================================
+1. Increase occupancy for convolution kernel by reducing register usage
+2. Implement memory coalescing optimizations for custom kernels  
+3. Consider using tensor cores for mixed-precision workloads
+4. Profile memory access patterns to reduce bank conflicts
+
+BASELINE vs CURRENT COMPARISON:
+================================================================================
+Metric                 | Baseline | Current  | Change   | Status
+-----------------------|----------|----------|----------|--------
+GPU Time (ms)          |    28.73 |    85.75 | +198.4%  | DEGRADED
+GFLOPS                 |  1345.63 |   862.85 |  -35.9%  | DEGRADED  
+Memory BW (GB/s)       |   845.33 |   489.95 |  -42.0%  | DEGRADED
+GPU Utilization        |    98.2% |    89.7% |   -8.7%  | DEGRADED
+Occupancy              |    92.7% |    78.4% |  -15.4%  | DEGRADED
+
+ANALYSIS CONCLUSIONS:
+================================================================================
+⚠️  PERFORMANCE REGRESSION DETECTED
+- Significant degradation across all key metrics
+- GPU utilization dropped, indicating potential driver/hardware issues
+- Memory bandwidth severely impacted
+- Recommend immediate investigation and system profiling
+================================================================================

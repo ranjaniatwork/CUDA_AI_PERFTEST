@@ -1,0 +1,7 @@
+timestamp,workload_type,matrix_size,iterations,gpu_time_ms,gflops,memory_bandwidth_gb_s,memory_utilization,gpu_name,session_id,anomaly_score,is_anomaly
+2025-07-08T12:20:02Z,matrix_multiplication,1024,10,15.2,1205.3,802.1,71.0,NVIDIA RTX 4090,current_session_1,0.15,false
+2025-07-08T12:20:03Z,matrix_multiplication,2048,10,185.5,862.4,489.2,95.0,NVIDIA RTX 4090,current_session_1,0.89,true
+2025-07-08T12:20:04Z,matrix_multiplication,4096,10,750.2,1234.5,320.7,98.0,NVIDIA RTX 4090,current_session_1,0.95,true
+2025-07-08T12:20:05Z,convolution_2d,512,10,22.3,885.1,775.8,72.0,NVIDIA RTX 4090,current_session_2,0.12,false
+2025-07-08T12:20:06Z,convolution_2d,1024,10,156.8,1205.4,520.3,92.0,NVIDIA RTX 4090,current_session_2,0.87,true
+2025-07-08T12:20:07Z,convolution_2d,2048,10,612.1,2105.6,435.2,96.0,NVIDIA RTX 4090,current_session_2,0.91,true

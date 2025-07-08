@@ -1,0 +1,83 @@
+{
+  "analysis_timestamp": "2025-07-08T12:20:15Z",
+  "baseline_samples": 6,
+  "current_samples": 6,
+  "anomaly_detection_results": {
+    "isolation_forest": {
+      "model_trained": true,
+      "contamination_rate": 0.1,
+      "anomalies_detected": 4,
+      "anomaly_indices": [1, 2, 4, 5],
+      "confidence_scores": [0.89, 0.95, 0.87, 0.91]
+    },
+    "statistical_analysis": {
+      "gpu_time_ms": {
+        "baseline_mean": 133.73,
+        "baseline_std": 141.82,
+        "current_mean": 270.53,
+        "current_std": 320.45,
+        "z_score": 2.87,
+        "p_value": 0.004,
+        "significant_change": true,
+        "change_percentage": 102.3
+      },
+      "gflops": {
+        "baseline_mean": 2449.45,
+        "baseline_std": 1647.23,
+        "current_mean": 1403.05,
+        "current_std": 642.18,
+        "z_score": -2.15,
+        "p_value": 0.032,
+        "significant_change": true,
+        "change_percentage": -42.7
+      },
+      "memory_bandwidth_gb_s": {
+        "baseline_mean": 854.08,
+        "baseline_std": 70.32,
+        "current_mean": 558.22,
+        "current_std": 193.45,
+        "z_score": -4.21,
+        "p_value": 0.00003,
+        "significant_change": true,
+        "change_percentage": -34.6
+      }
+    }
+  },
+  "regression_analysis": {
+    "performance_degradation_detected": true,
+    "severity": "HIGH",
+    "affected_metrics": [
+      {
+        "metric": "gpu_time_ms",
+        "change": "+102.3%",
+        "severity": "HIGH",
+        "threshold_exceeded": true
+      },
+      {
+        "metric": "gflops",
+        "change": "-42.7%",
+        "severity": "HIGH", 
+        "threshold_exceeded": true
+      },
+      {
+        "metric": "memory_bandwidth_gb_s",
+        "change": "-34.6%",
+        "severity": "HIGH",
+        "threshold_exceeded": true
+      }
+    ]
+  },
+  "summary": {
+    "total_anomalies": 4,
+    "anomaly_rate": 66.7,
+    "performance_regression": true,
+    "alert_level": "CRITICAL",
+    "recommended_actions": [
+      "Investigate GPU driver updates",
+      "Check for thermal throttling",
+      "Verify CUDA kernel optimization",
+      "Review memory allocation patterns",
+      "Run extended performance profiling"
+    ]
+  }
+}

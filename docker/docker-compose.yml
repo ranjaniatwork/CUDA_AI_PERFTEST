@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  perfai:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: perfai:latest
+    container_name: perfai_main
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    volumes:
+      - ../data:/app/data
+      - ../logs:/app/logs
+      - ../config.local.json:/app/config.json:ro
+    working_dir: /app
+    command: python3 src/pipeline/perfai_pipeline.py --config config.json --verbose
+    
+  perfai-dev:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: perfai:latest
+    container_name: perfai_dev
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    volumes:
+      - ..:/app
+    working_dir: /app
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+    
+  perfai-benchmark:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: perfai:latest
+    container_name: perfai_benchmark
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    volumes:
+      - ../data:/app/data
+      - ../logs:/app/logs
+    working_dir: /app
+    command: bin/cuda_benchmark --matrix-sizes 512,1024,2048 --iterations 10 --output-format json
+    
+  perfai-analysis:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: perfai:latest
+    container_name: perfai_analysis
+    volumes:
+      - ../data:/app/data
+      - ../logs:/app/logs
+    working_dir: /app
+    command: python3 src/analysis/detect_anomaly.py --baseline data/baselines/latest_baseline.json --current data/runs/latest_run.json --output analysis_results
+    
+networks:
+  default:
+    name: perfai_network

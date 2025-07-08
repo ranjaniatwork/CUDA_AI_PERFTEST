@@ -1,0 +1,57 @@
+{
+  "data_dir": "data",
+  "benchmark_executable": "./bin/cuda_benchmark",
+  "confidence_threshold": 0.95,
+  "contamination_rate": 0.1,
+  
+  "benchmark_config": {
+    "matrix_sizes": [512, 1024, 2048, 4096],
+    "iterations": 10,
+    "output_format": "json",
+    "workloads": ["gemm", "conv", "bandwidth"]
+  },
+  
+  "alert_thresholds": {
+    "high_severity": 0.3,
+    "medium_severity": 0.1,
+    "low_severity": 0.05
+  },
+  
+  "output_formats": ["json", "csv", "html"],
+  "enable_visualizations": true,
+  "baseline_auto_update": true,
+  "baseline_min_samples": 50,
+  
+  "analysis_config": {
+    "isolation_forest": {
+      "n_estimators": 100,
+      "contamination": "auto",
+      "random_state": 42
+    },
+    "statistical_thresholds": {
+      "z_score_threshold": 2.5,
+      "iqr_multiplier": 1.5
+    }
+  },
+  
+  "database": {
+    "enabled": true,
+    "path": "data/performance.db",
+    "retention_days": 90
+  },
+  
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "file": "logs/perfai.log",
+    "max_file_size": "10MB",
+    "backup_count": 5
+  },
+  
+  "ci_cd": {
+    "enabled": true,
+    "fail_on_high_severity": true,
+    "fail_on_medium_severity": false,
+    "notification_webhooks": []
+  }
+}
